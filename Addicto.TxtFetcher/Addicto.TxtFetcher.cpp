@@ -67,6 +67,8 @@ VOID SendCopyCommandToCurrentWindow() {
 
 ADDICTOTXTFETCHER_API LPWSTR FetchSelectedText()
 {
+	EnterCriticalSection(&ConcurrencyGuard);
+
 	LPWSTR result = (LPWSTR)CoTaskMemAlloc((BufferLength + 1) * sizeof(WCHAR));
 	result[0] = '\0';
 
@@ -96,6 +98,8 @@ ADDICTOTXTFETCHER_API LPWSTR FetchSelectedText()
 	{
 		//TODO: error handling
 	}
+
+	LeaveCriticalSection(&ConcurrencyGuard);
 
 	return result;
 }
