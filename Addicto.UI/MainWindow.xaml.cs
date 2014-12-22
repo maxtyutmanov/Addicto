@@ -46,12 +46,17 @@ namespace Addicto.UI
             }
         }
 
-        void _kbListener_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
+        async void _kbListener_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
         {
             if (e.KeyCode == System.Windows.Forms.Keys.LWin && _magicCombination)
             {
                 string txt = TxtFetcherFacade.FetchSelectedText();
-                Txt.AppendText(txt + Environment.NewLine);
+                DataService.Client.Proxies.Clients.ArticlesDsProxy proxy = new DataService.Client.Proxies.Clients.ArticlesDsProxy();
+
+                var response = await proxy.GetAsync(txt);
+                var result = await response.Content.ReadAsStringAsync();
+
+                MessageBox.Show(result);
             }
         }
     }

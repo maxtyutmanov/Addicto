@@ -1,0 +1,114 @@
+
+
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using System.Net.Http.Formatting;
+using Addicto.DataService.Client.Proxies.Models;
+
+// Proxies
+namespace Addicto.DataService.Client.Proxies
+{
+    public partial class Configuration
+	{
+		public const string DataServiceProxyBaseAddress = "http://localhost:53903";
+		
+	}
+}
+
+namespace Addicto.DataService.Client.Proxies.Models
+{
+}
+
+
+namespace Addicto.DataService.Client.Proxies.Clients
+{
+	public partial class ArticlesDsProxy : IDisposable
+	{
+
+		public HttpClient HttpClient { get; private set; }
+
+		/// <summary>
+        /// 
+        /// </summary>
+		public ArticlesDsProxy()
+		{
+			HttpClient = new HttpClient()
+			{
+				BaseAddress = new Uri(Configuration.DataServiceProxyBaseAddress)
+			};
+		}
+
+		/// <summary>
+        /// 
+        /// </summary>
+		public ArticlesDsProxy(HttpMessageHandler handler, bool disposeHandler = true)
+		{
+			HttpClient = new HttpClient(handler, disposeHandler)
+			{
+				BaseAddress = new Uri(Configuration.DataServiceProxyBaseAddress)
+			};
+		}
+
+		#region Methods
+        /// <summary>
+        /// 
+        /// </summary>
+		/// <param name="id"></param>
+        /// <returns></returns>
+		public virtual async Task<HttpResponseMessage> GetAsync(Int32 id)
+		{
+			return await HttpClient.GetAsync("api/Articles/" + id);
+		}
+
+        /// <summary>
+        /// 
+        /// </summary>
+		/// <param name="query"></param>
+        /// <returns></returns>
+		public virtual async Task<HttpResponseMessage> GetAsync(String query)
+		{
+			return await HttpClient.GetAsync("api/Articles?query=" + query);
+		}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+		public virtual async Task<HttpResponseMessage> PostAsync(String value)
+		{
+			return await HttpClient.PostAsJsonAsync<String>("api/Articles", value);
+		}
+
+        /// <summary>
+        /// 
+        /// </summary>
+		/// <param name="id"></param>
+        /// <returns></returns>
+		public virtual async Task<HttpResponseMessage> PutAsync(Int32 id,String value)
+		{
+			return await HttpClient.PutAsJsonAsync<String>("api/Articles/" + id, value);
+		}
+
+        /// <summary>
+        /// 
+        /// </summary>
+		/// <param name="id"></param>
+        /// <returns></returns>
+		public virtual async Task<HttpResponseMessage> DeleteAsync(Int32 id)
+		{
+			return await HttpClient.DeleteAsync("api/Articles/" + id);
+		}
+
+		#endregion
+
+		public void Dispose()
+        {
+            HttpClient.Dispose();
+        }
+	}
+
+}
+
