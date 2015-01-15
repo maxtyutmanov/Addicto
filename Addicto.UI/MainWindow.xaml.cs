@@ -28,6 +28,17 @@ namespace Addicto.UI
         public MainWindow()
         {
             InitializeComponent();
+
+            System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
+            ni.Icon = new System.Drawing.Icon("Main.ico");
+            ni.Visible = true;
+            ni.DoubleClick +=
+                delegate(object sender, EventArgs args)
+                {
+                    this.Show();
+                    this.WindowState = WindowState.Normal;
+                };
+
             _kbListener = new KeyboardHookListener(new GlobalHooker());
             _kbListener.Enabled = true;
             _kbListener.KeyDown += _kbListener_KeyDown;
@@ -53,6 +64,14 @@ namespace Addicto.UI
                 string txt = TxtFetcherFacade.FetchSelectedText();
                 Txt.AppendText(txt + Environment.NewLine);
             }
+        }
+
+        protected override void OnStateChanged(EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized)
+                this.Hide();
+
+            base.OnStateChanged(e);
         }
     }
 }
