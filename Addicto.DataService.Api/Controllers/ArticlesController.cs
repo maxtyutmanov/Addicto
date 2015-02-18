@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Addicto.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -18,17 +19,9 @@ namespace Addicto.DataService.Api.Controllers
         // GET api/articles?query=some_query
         public string Get(string query)
         {
-            if (query == "TABLE1")
+            using (var db = new AddictoDBContext())
             {
-                return "This is the first table";
-            }
-            else if (query == "TABLE2")
-            {
-                return "This is the second table";
-            }
-            else
-            {
-                return "";
+                return db.AddictoWords.FirstOrDefault(k => k.Key == query).Value;
             }
         }
 
