@@ -62,6 +62,9 @@ namespace Addicto.UI
             if (e.KeyCode == System.Windows.Forms.Keys.LWin && _magicCombination)
             {
                 string txt = TxtFetcherFacade.FetchSelectedText();
+
+                PopupWindow.IsOpen = true;
+
                 DataService.Client.Proxies.Clients.ArticlesDsProxy proxy = new DataService.Client.Proxies.Clients.ArticlesDsProxy();
 
                 var response = await proxy.GetAsync(txt);
