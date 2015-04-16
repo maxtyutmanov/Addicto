@@ -1,4 +1,6 @@
-﻿using MouseKeyboardActivityMonitor;
+﻿using Addicto.UI.Utils;
+using Addicto.UI.VM;
+using MouseKeyboardActivityMonitor;
 using MouseKeyboardActivityMonitor.WinApi;
 using System;
 using System.Collections.Generic;
@@ -22,12 +24,14 @@ namespace Addicto.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private KeyboardHookListener _kbListener;
-        private bool _magicCombination;
+        private PopupWindowVM _popupWindowVM;
+        private readonly KeyboardListener _kbListener;
 
         public MainWindow()
         {
             InitializeComponent();
+            _popupWindowVM = new PopupWindowVM();
+            PopupWindow.DataContext = _popupWindowVM;
 
             System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
             ni.Icon = new System.Drawing.Icon("Main.ico");
@@ -39,38 +43,28 @@ namespace Addicto.UI
                     this.WindowState = WindowState.Normal;
                 };
 
-            _kbListener = new KeyboardHookListener(new GlobalHooker());
-            _kbListener.Enabled = true;
-            _kbListener.KeyDown += _kbListener_KeyDown;
-            _kbListener.KeyUp += _kbListener_KeyUp;
+            _kbListener = new KeyboardListener();
+            _kbListener.MagicCombinationPressed += _kbListener_MagicCombinationPressed;
         }
 
-        void _kbListener_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        private async void _kbListener_MagicCombinationPressed(object sender, EventArgs e)
         {
-            if (e.Alt && e.KeyCode == System.Windows.Forms.Keys.LWin)
+            string txt = TxtFetcherFacade.FetchSelectedText();
+
+            var proxy = new DataService.Client.Proxies.Clients.ArticlesDsProxy();
+
+            var response = await proxy.GetAsync(txt);
+            var result = await response.Content.ReadAsStringAsync();
+
+            if (!String.IsNullOrEmpty(result))
             {
-                _magicCombination = true;
+                _popupWindowVM.Visible = true;
+                _popupWindowVM.FoundText = result;
             }
             else
             {
-                _magicCombination = false;
-            }
-        }
-
-        async void _kbListener_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
-        {
-            if (e.KeyCode == System.Windows.Forms.Keys.LWin && _magicCombination)
-            {
-                string txt = TxtFetcherFacade.FetchSelectedText();
-
-                PopupWindow.IsOpen = true;
-
-                DataService.Client.Proxies.Clients.ArticlesDsProxy proxy = new DataService.Client.Proxies.Clients.ArticlesDsProxy();
-
-                var response = await proxy.GetAsync(txt);
-                var result = await response.Content.ReadAsStringAsync();
-
-                MessageBox.Show(result);
+                _popupWindowVM.Visible = false;
+                _popupWindowVM.FoundText = String.Empty;
             }
         }
 

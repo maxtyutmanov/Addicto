@@ -21,7 +21,16 @@ namespace Addicto.DataService.Api.Controllers
         {
             using (var db = new AddictoDBContext())
             {
-                return db.AddictoWords.FirstOrDefault(k => k.Key == query).Value;
+                AddictoWord foundWord = db.AddictoWords.FirstOrDefault(k => k.Key == query);
+
+                if (foundWord != null)
+                {
+                    return foundWord.Value;
+                }
+                else 
+                {
+                    return String.Empty;
+                }
             }
         }
 
