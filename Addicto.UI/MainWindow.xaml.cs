@@ -25,11 +25,23 @@ namespace Addicto.UI
     public partial class MainWindow : Window
     {
         private PopupWindowVM _popupWindowVM;
-        private readonly KeyboardListener _kbListener;
+        private readonly IKeyboardListener _kbListener;
+        private readonly ITextFetcher _textFetcher;
+        private readonly IDataServiceFacade _dataServiceFacade;
 
         public MainWindow()
+            : this(new KeyboardListener(), new TextFetcher(), new DataServiceFacade()) //poor man's injection
+        {
+        }
+
+        public MainWindow(IKeyboardListener kbListener, ITextFetcher textFetcher, IDataServiceFacade dataServiceFacade)
         {
             InitializeComponent();
+
+            _kbListener = kbListener;
+            _textFetcher = textFetcher;
+            _dataServiceFacade = dataServiceFacade;
+
             _popupWindowVM = new PopupWindowVM();
             PopupWindow.DataContext = _popupWindowVM;
 
@@ -42,24 +54,19 @@ namespace Addicto.UI
                     this.Show();
                     this.WindowState = WindowState.Normal;
                 };
-
-            _kbListener = new KeyboardListener();
+            
             _kbListener.MagicCombinationPressed += _kbListener_MagicCombinationPressed;
         }
 
         private async void _kbListener_MagicCombinationPressed(object sender, EventArgs e)
         {
-            string txt = TxtFetcherFacade.FetchSelectedText();
+            string selectedTxt = _textFetcher.FetchSelectedText();
+            string foundTxt = await _dataServiceFacade.FindArticleAsync(selectedTxt);
 
-            var proxy = new DataService.Client.Proxies.Clients.ArticlesDsProxy();
-
-            var response = await proxy.GetAsync(txt);
-            var result = await response.Content.ReadAsStringAsync();
-
-            if (!String.IsNullOrEmpty(result))
+            if (!String.IsNullOrEmpty(foundTxt))
             {
                 _popupWindowVM.Visible = true;
-                _popupWindowVM.FoundText = result;
+                _popupWindowVM.FoundText = foundTxt;
             }
             else
             {

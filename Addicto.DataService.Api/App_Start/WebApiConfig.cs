@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using WebApiProxy.Server;
 
 namespace Addicto.DataService.Api
 {
@@ -10,6 +11,8 @@ namespace Addicto.DataService.Api
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+
+            config.RegisterProxyRoutes();
 
             // Web API routes
             config.MapHttpAttributeRoutes();

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Addicto.UI.Utils
 {
-    public class KeyboardListener 
+    public class KeyboardListener : IKeyboardListener
     {
         private readonly KeyboardHookListener _kbListener;
         private bool _magicCombination;
