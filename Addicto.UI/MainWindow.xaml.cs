@@ -28,7 +28,7 @@ namespace Addicto.UI
         {
             InitializeComponent();
 
-            System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
+            var ni = new System.Windows.Forms.NotifyIcon();
             ni.Icon = new System.Drawing.Icon("Main.ico");
             ni.Visible = true;
             ni.DoubleClick +=
@@ -37,8 +37,8 @@ namespace Addicto.UI
                     this.Show();
                     this.WindowState = WindowState.Normal;
                 };
-
             this.DataContext = new MainVM();
+            //this.Hide();
         }
 
         protected override void OnStateChanged(EventArgs e)
