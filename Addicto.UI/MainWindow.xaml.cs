@@ -24,26 +24,9 @@ namespace Addicto.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private PopupWindowVM _popupWindowVM;
-        private readonly IKeyboardListener _kbListener;
-        private readonly ITextFetcher _textFetcher;
-        private readonly IDataServiceFacade _dataServiceFacade;
-
         public MainWindow()
-            : this(new KeyboardListener(), new TextFetcher(), new DataServiceFacade()) //poor man's injection
-        {
-        }
-
-        public MainWindow(IKeyboardListener kbListener, ITextFetcher textFetcher, IDataServiceFacade dataServiceFacade)
         {
             InitializeComponent();
-
-            _kbListener = kbListener;
-            _textFetcher = textFetcher;
-            _dataServiceFacade = dataServiceFacade;
-
-            _popupWindowVM = new PopupWindowVM();
-            PopupWindow.DataContext = _popupWindowVM;
 
             System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
             ni.Icon = new System.Drawing.Icon("Main.ico");
@@ -54,25 +37,8 @@ namespace Addicto.UI
                     this.Show();
                     this.WindowState = WindowState.Normal;
                 };
-            
-            _kbListener.MagicCombinationPressed += _kbListener_MagicCombinationPressed;
-        }
 
-        private async void _kbListener_MagicCombinationPressed(object sender, EventArgs e)
-        {
-            string selectedTxt = _textFetcher.FetchSelectedText();
-            string foundTxt = await _dataServiceFacade.FindArticleAsync(selectedTxt);
-
-            if (!String.IsNullOrEmpty(foundTxt))
-            {
-                _popupWindowVM.Visible = true;
-                _popupWindowVM.FoundText = foundTxt;
-            }
-            else
-            {
-                _popupWindowVM.Visible = false;
-                _popupWindowVM.FoundText = String.Empty;
-            }
+            this.DataContext = new MainVM();
         }
 
         protected override void OnStateChanged(EventArgs e)

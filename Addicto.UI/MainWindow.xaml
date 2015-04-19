@@ -5,14 +5,14 @@
     <Grid>
         <Popup Name="PopupWindow"
                Placement="Mouse"
-               IsOpen="{Binding Visible}"
+               IsOpen="{Binding PopupVM.Visible}"
                StaysOpen="False">
 
             <Border Width="100" 
                     Height="100"
                     Background="White"
                     BorderBrush="Black" BorderThickness="1" CornerRadius="3">
-                <TextBlock Text="{Binding FoundText}" Margin="3"/>
+                <TextBlock Text="{Binding PopupVM.FoundText}" Margin="3"/>
             </Border>
         </Popup>
     </Grid>

@@ -7,24 +7,37 @@ using System.Windows;
 
 namespace Addicto.UI.VM
 {
-    public class PopupWindowVM : DependencyObject
+    public class PopupWindowVM : BaseVM
     {
+        private bool _visible;
         public bool Visible
         {
-            get { return (bool)GetValue(VisibleProperty); }
-            set { SetValue(VisibleProperty, value); }
+            get
+            {
+                return _visible;
+            }
+            set
+            {
+                _visible = value;
+                OnPropertyChanged();
+            }
         }
 
-        public static readonly DependencyProperty VisibleProperty =
-            DependencyProperty.Register("Visible", typeof(bool), typeof(PopupWindowVM), new PropertyMetadata(false));
-
+        private string _foundText;
         public string FoundText
         {
-            get { return (string)GetValue(FoundTextProperty); }
-            set { SetValue(FoundTextProperty, value); }
-        }
+            get
+            {
+                return _foundText;
+            }
+            set
+            {
+                _foundText = value;
 
-        public static readonly DependencyProperty FoundTextProperty =
-            DependencyProperty.Register("FoundText", typeof(string), typeof(PopupWindowVM), new PropertyMetadata(String.Empty));
+                Visible = !String.IsNullOrEmpty(_foundText);
+
+                OnPropertyChanged();
+            }
+        }
     }
 }

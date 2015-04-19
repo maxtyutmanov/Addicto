@@ -15,6 +15,11 @@ namespace Addicto.UI.Utils
             var response = await proxy.GetAsync(query);
             var result = await response.Content.ReadAsStringAsync();
 
+            if (!String.IsNullOrEmpty(result))
+            {
+                result = result.Trim('"');
+            }
+
             return result;
         }
     }

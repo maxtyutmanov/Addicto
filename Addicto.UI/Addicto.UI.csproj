@@ -66,6 +66,8 @@
     <Compile Include="Utils\ITextFetcher.cs" />
     <Compile Include="Utils\KeyboardListener.cs" />
     <Compile Include="Utils\TextFetcher.cs" />
+    <Compile Include="VM\BaseVM.cs" />
+    <Compile Include="VM\MainVM.cs" />
     <Compile Include="VM\PopupWindowVM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
