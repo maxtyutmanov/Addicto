@@ -61,7 +61,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="TxtFetcherFacade.cs" />
     <Compile Include="Utils\DataServiceFacade.cs" />
     <Compile Include="Utils\IDataServiceFacade.cs" />
     <Compile Include="Utils\IKeyboardListener.cs" />

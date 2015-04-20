@@ -13,5 +13,9 @@ namespace Addicto.UI
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            Addicto.DataService.Client.DataServiceProxyConfig.Initialize();
+        }
     }
 }

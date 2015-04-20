@@ -24,7 +24,7 @@ namespace Addicto.DataService.Client.Proxies
 		/// <summary>
 		/// Web Api Base Address.
 		/// </summary>
-		public static string MyWebApiProxyBaseAddress = "http://localhost:81";
+		public static string MyWebApiProxyBaseAddress = "http://localhost:86";
 		
 	}
 }
