@@ -24,6 +24,8 @@ namespace Addicto.UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly MainVM _vm;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -35,18 +37,45 @@ namespace Addicto.UI
                 delegate(object sender, EventArgs args)
                 {
                     this.Show();
-                    this.WindowState = WindowState.Normal;
+                    this._vm.Visible = false;
                 };
-            this.DataContext = new MainVM();
-            //this.Hide();
+            this._vm = new MainVM();
+            this.DataContext = this._vm;
+            this.Deactivated += MainWindow_Deactivated;
+            this._vm.VisibleChanged += _vm_VisibleChanged;
+
+            this.UpdateVisibility();
         }
 
-        protected override void OnStateChanged(EventArgs e)
+        private void _vm_VisibleChanged(object sender, EventArgs e)
         {
-            if (WindowState == WindowState.Minimized)
-                this.Hide();
+            UpdateVisibility();
+        }
 
-            base.OnStateChanged(e);
+        private void UpdateVisibility()
+        {
+            if (this._vm.Visible)
+            {
+                this.Show();
+                Point mousePos = GetMousePosition();
+                this.Left = mousePos.X;
+                this.Top = mousePos.Y;
+            }
+            else
+            {
+                this.Hide();
+            }
+        }
+
+        private void MainWindow_Deactivated(object sender, EventArgs e)
+        {
+            this._vm.Visible = false;
+        }
+
+        private Point GetMousePosition()
+        {
+            System.Drawing.Point point = System.Windows.Forms.Control.MousePosition;
+            return new Point(point.X, point.Y);
         }
     }
 }

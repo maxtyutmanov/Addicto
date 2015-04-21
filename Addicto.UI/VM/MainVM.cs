@@ -12,17 +12,37 @@ namespace Addicto.UI.VM
         private readonly IKeyboardListener _kbListener;
         private readonly ITextFetcher _textFetcher;
         private readonly IDataServiceFacade _dataServiceFacade;
-        private PopupWindowVM _popupWindowVM;
 
-        public PopupWindowVM PopupVM
+        public event EventHandler VisibleChanged;
+
+        private bool _visible;
+        public bool Visible
         {
             get
             {
-                return _popupWindowVM;
+                return _visible;
             }
             set
             {
-                _popupWindowVM = value;
+                _visible = value;
+                OnPropertyChanged();
+                OnVisibleChanged();
+            }
+        }
+
+        private string _foundText;
+        public string FoundText
+        {
+            get
+            {
+                return _foundText;
+            }
+            set
+            {
+                _foundText = value;
+
+                Visible = !String.IsNullOrEmpty(_foundText);
+
                 OnPropertyChanged();
             }
         }
@@ -30,7 +50,6 @@ namespace Addicto.UI.VM
         public MainVM()
             : this(new KeyboardListener(), new TextFetcher(), new DataServiceFacade()) //poor man's injection
         {
-            this._popupWindowVM = new PopupWindowVM();
         }
 
         public MainVM(IKeyboardListener kbListener, ITextFetcher textFetcher, IDataServiceFacade dataServiceFacade)
@@ -47,7 +66,16 @@ namespace Addicto.UI.VM
             string selectedTxt = _textFetcher.FetchSelectedText();
             string foundTxt = await _dataServiceFacade.FindArticleAsync(selectedTxt);
 
-            _popupWindowVM.FoundText = foundTxt;
+            this.FoundText = foundTxt;
+        }
+
+        protected void OnVisibleChanged()
+        {
+            var handler = this.VisibleChanged;
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
         }
     }
 }
