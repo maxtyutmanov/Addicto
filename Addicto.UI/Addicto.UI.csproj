@@ -131,9 +131,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Addicto.DataService.Client\Addicto.DataService.Client.csproj">
+    <ProjectReference Include="..\Addicto.DataService.Proxy\Addicto.DataService.Proxy.csproj">
       <Project>{a12eb5be-5682-4bee-9dde-232d2a4e043b}</Project>
-      <Name>Addicto.DataService.Client</Name>
+      <Name>Addicto.DataService.Proxy</Name>
     </ProjectReference>
     <ProjectReference Include="..\Gma.UserActivityMonitor\Gma.UserActivityMonitor.csproj">
       <Project>{f52aa97e-180a-40ed-8f2b-09080171d6c7}</Project>
