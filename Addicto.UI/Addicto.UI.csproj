@@ -80,9 +80,6 @@
     <Compile Include="Utils\TextFetcher.cs" />
     <Compile Include="VM\BaseVM.cs" />
     <Compile Include="VM\MainVM.cs" />
-    <Compile Include="VM\PopupWindowVM.cs" />
-    <Compile Include="WpfUtils\BoolToVisibilityConverter.cs" />
-    <Compile Include="WpfUtils\BoolToWindowStateConverter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
