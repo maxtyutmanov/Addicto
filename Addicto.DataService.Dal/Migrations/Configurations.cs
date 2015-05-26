@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Addicto.DataService.Dal;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -11,15 +12,17 @@ namespace Addicto.DAL.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
+            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationDataLossAllowed = false;
         }
 
         protected override void Seed(AddictoDBContext context)
         {
-            context.AddictoWords.AddOrUpdate(r => r.Key,
-                new AddictoWord { Key = "Skode", Value = "Быстро" }
-                );
+            context.Articles.Add(new DataService.Model.Article()
+            {
+                Key = "SK_SKOD_ZAHTEVEK",
+                Content = "Таблица с убытками"
+            });
         }
     }
 }

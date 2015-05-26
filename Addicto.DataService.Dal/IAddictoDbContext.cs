@@ -8,14 +8,8 @@ using System.Threading.Tasks;
 
 namespace Addicto.DataService.Dal
 {
-    public class AddictoDBContext : DbContext, IAddictoDbContext
+    public interface IAddictoDbContext
     {
-        public AddictoDBContext()
-            : base("name=Main")
-        {
-
-        }
-
-        public DbSet<Article> Articles { get; set; }
+        DbSet<Article> Articles { get; }
     }
 }

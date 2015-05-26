@@ -1,4 +1,5 @@
-﻿using Addicto.DAL;
+﻿using Addicto.DataService.Business;
+using Addicto.DataService.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,42 +11,38 @@ namespace Addicto.DataService.Api.Controllers
 {
     public class ArticlesController : ApiController
     {
-        // GET api/articles/5
-        public string Get(int id)
+        private readonly IArticleService _articleService;
+
+        public ArticlesController()
+            : this(new ArticleService())
         {
-            return "value";
+        }
+
+        public ArticlesController(IArticleService articleService)
+        {
+            this._articleService = articleService;
         }
 
         // GET api/articles?query=some_query
         public string Get(string query)
         {
-            using (var db = new AddictoDBContext())
+            Article foundArticle = this._articleService.GetBestMatch(new Model.ArticleQuery()
             {
-                AddictoWord foundWord = db.AddictoWords.FirstOrDefault(k => k.Key == query);
+                QueryText = query
+            });
 
-                if (foundWord != null)
-                {
-                    return foundWord.Value;
-                }
-                else 
-                {
-                    return String.Empty;
-                }
+            if (foundArticle != null)
+            {
+                return foundArticle.Content;
+            }
+            else
+            {
+                return String.Empty;
             }
         }
 
-        // POST api/values
+        // POST api/articles
         public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        public void Delete(int id)
         {
         }
     }
