@@ -23,7 +23,6 @@ namespace Addicto.DataService.Business
 
         public Model.Article GetBestMatch(Model.ArticleQuery query)
         {
-            string conStr = (_dbContext as System.Data.Entity.DbContext).Database.Connection.ConnectionString;
             return _dbContext.Articles.FirstOrDefault(x => x.Key == query.QueryText);
         }
     }
