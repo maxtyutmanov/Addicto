@@ -30,18 +30,31 @@ namespace Addicto.UI.VM
             }
         }
 
-        private string _foundText;
-        public string FoundText
+        private string _displayText;
+        public string DisplayText
         {
             get
             {
-                return _foundText;
+                return _displayText;
             }
             set
             {
-                _foundText = value;
+                _displayText = value;
 
-                Visible = !String.IsNullOrEmpty(_foundText);
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _searchInProgress;
+        public bool SearchInProgress
+        {
+            get
+            {
+                return _searchInProgress;
+            }
+            private set
+            {
+                _searchInProgress = value;
 
                 OnPropertyChanged();
             }
@@ -64,9 +77,29 @@ namespace Addicto.UI.VM
         private async void _kbListener_MagicCombinationPressed(object sender, EventArgs e)
         {
             string selectedTxt = _textFetcher.FetchSelectedText();
+            OnSearchStarted();
             string foundTxt = await _dataServiceFacade.FindArticleAsync(selectedTxt);
+            OnSearchComplete(foundTxt);
+        }
 
-            this.FoundText = foundTxt;
+        private void OnSearchStarted()
+        {
+            this.DisplayText = "";
+            this.SearchInProgress = true;
+            this.Visible = true;
+        }
+
+        private void OnSearchComplete(string foundTxt)
+        {
+            if (String.IsNullOrEmpty(foundTxt))
+            {
+                this.DisplayText = "Ничего не найдено";
+            }
+            else
+            {
+                this.DisplayText = foundTxt;
+            }
+            this.SearchInProgress = false;
         }
 
         protected void OnVisibleChanged()

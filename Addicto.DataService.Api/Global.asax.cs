@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Addicto.DataService.Api.Handlers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,6 +21,10 @@ namespace Addicto.DataService.Api
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            log4net.Config.XmlConfigurator.Configure();
+
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new LogRequestAndResponseHandler());
         }
     }
 }
