@@ -26,8 +26,6 @@ namespace Addicto.DataService.Api.Controllers
         // GET api/articles?query=some_query
         public string Get(string query)
         {
-            System.Threading.Thread.Sleep(2000);
-
             Article foundArticle = this._articleService.GetBestMatch(new Model.ArticleQuery()
             {
                 QueryText = query
