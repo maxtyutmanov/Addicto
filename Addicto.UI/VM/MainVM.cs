@@ -1,4 +1,5 @@
 ﻿using Addicto.UI.Utils;
+using Addicto.UI.VM.SearchStateVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,32 +31,16 @@ namespace Addicto.UI.VM
             }
         }
 
-        private string _displayText;
-        public string DisplayText
+        private object _searchStateVM;
+        public object SearchStateVM
         {
             get
             {
-                return _displayText;
+                return _searchStateVM;
             }
             set
             {
-                _displayText = value;
-
-                OnPropertyChanged();
-            }
-        }
-
-        private bool _searchInProgress;
-        public bool SearchInProgress
-        {
-            get
-            {
-                return _searchInProgress;
-            }
-            private set
-            {
-                _searchInProgress = value;
-
+                _searchStateVM = value;
                 OnPropertyChanged();
             }
         }
@@ -84,8 +69,7 @@ namespace Addicto.UI.VM
 
         private void OnSearchStarted()
         {
-            this.DisplayText = "";
-            this.SearchInProgress = true;
+            this.SearchStateVM = new InProgressVM();
             this.Visible = true;
         }
 
@@ -93,13 +77,15 @@ namespace Addicto.UI.VM
         {
             if (String.IsNullOrEmpty(foundTxt))
             {
-                this.DisplayText = "Ничего не найдено";
+                this.SearchStateVM = new NothingFoundVM();
             }
             else
             {
-                this.DisplayText = foundTxt;
+                this.SearchStateVM = new FoundVM()
+                {
+                    FoundText = foundTxt
+                };
             }
-            this.SearchInProgress = false;
         }
 
         protected void OnVisibleChanged()

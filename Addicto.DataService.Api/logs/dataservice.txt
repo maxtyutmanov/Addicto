@@ -247,3 +247,113 @@ DEBUG 2015-08-10 20:00:22,129   959ms uestAndResponseHandler SendAsync          
   User-Agent: Safari/537.36
   HTTPS: 1
 }
+DEBUG 2015-08-11 00:25:22,707  1063ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=injection', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Connection: Keep-Alive
+  Host: localhost
+}
+DEBUG 2015-08-11 00:25:22,707  1063ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=IDataServiceFacade', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Connection: Keep-Alive
+  Host: localhost
+}
+DEBUG 2015-08-11 00:25:22,707  1063ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=textFetcher', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Connection: Keep-Alive
+  Host: localhost
+}
+DEBUG 2015-08-11 00:25:22,707  1063ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=poor', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Connection: Keep-Alive
+  Host: localhost
+}
+DEBUG 2015-08-11 00:25:29,045  7401ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=ITextFetcher', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Connection: Keep-Alive
+  Host: localhost
+}
+DEBUG 2015-08-11 00:26:31,156 69512ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=templateRetriever', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Host: localhost
+}
+DEBUG 2015-08-11 00:34:46,453 564809ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=FoundTemplate', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Connection: Keep-Alive
+  Host: localhost
+}
+DEBUG 2015-08-11 00:34:50,726 569082ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=DataTemplate', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Host: localhost
+}
+DEBUG 2015-08-11 00:34:53,926 572282ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=SelectTemplate', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Host: localhost
+}
+DEBUG 2015-08-11 00:34:57,085 575441ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=item', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Host: localhost
+}
+DEBUG 2015-08-11 00:35:00,989 579346ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=NothingFoundTemplate', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Host: localhost
+}
+DEBUG 2015-08-11 00:35:54,725 633081ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=SearchFinishedNothingFound', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Connection: Keep-Alive
+  Host: localhost
+}
+DEBUG 2015-08-11 00:35:58,365 636721ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=HorizontalAlignment', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Host: localhost
+}
+DEBUG 2015-08-11 00:36:02,421 640777ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=BusyAnimationStyle', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Host: localhost
+}
+DEBUG 2015-08-11 00:38:03,774 762131ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=BusyAnimationStyle', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Connection: Keep-Alive
+  Host: localhost
+}
+DEBUG 2015-08-11 00:38:07,376 765732ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=Text', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Host: localhost
+}
+DEBUG 2015-08-11 00:38:10,287 768643ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=InProgressVM', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Host: localhost
+}
+DEBUG 2015-08-11 00:38:13,053 771409ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=BaseVM', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Host: localhost
+}
+DEBUG 2015-08-11 00:38:31,405 789761ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=SK_SKOD_ZAHTEVEK', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Host: localhost
+}
+DEBUG 2015-08-11 00:39:01,550 819907ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=SK_SKOD_ZAHTEVEK', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Host: localhost
+}
+DEBUG 2015-08-11 00:41:25,689 964045ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=<TextBlock Text="{Binding FoundText}" TextWrapping="Wrap" Margin="5"%0D%0A                           VerticalAlignment="Center" HorizontalAlignment="Center"/>', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Connection: Keep-Alive
+  Host: localhost
+}
+DEBUG 2015-08-11 00:41:29,966 968322ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=<TextBlock Text="{Binding FoundText}" TextWrapping="Wrap" Margin="5"%0D%0A                           VerticalAlignment="Center" HorizontalAlignment="Center"/>', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Host: localhost
+}
+DEBUG 2015-08-11 00:41:38,310 976666ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=SK_SKOD_ZAHTEVEK', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Host: localhost
+}
+DEBUG 2015-08-11 00:42:32,451 1030807ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=Посмотреть', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Connection: Keep-Alive
+  Host: localhost
+}
+DEBUG 2015-08-11 00:43:04,954 1063310ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/Articles?query=SK_SKOD_ZAHTEVEK', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Host: localhost
+}
