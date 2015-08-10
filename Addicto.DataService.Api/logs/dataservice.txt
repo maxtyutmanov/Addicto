@@ -221,3 +221,29 @@ DEBUG 2015-05-27 02:20:34,436 766724ms uestAndResponseHandler SendAsync         
   Connection: Keep-Alive
   Host: localhost
 }
+DEBUG 2015-08-10 20:00:22,129   959ms uestAndResponseHandler SendAsync          - Method: GET, RequestUri: 'http://localhost/Addicto.DataService.Api/api/proxies', Version: 1.1, Content: System.Web.Http.WebHost.HttpControllerHandler+LazyStreamContent, Headers:
+{
+  Connection: keep-alive
+  Accept: text/html
+  Accept: application/xhtml+xml
+  Accept: application/xml; q=0.9
+  Accept: image/webp
+  Accept: */*; q=0.8
+  Accept-Encoding: gzip
+  Accept-Encoding: deflate
+  Accept-Encoding: sdch
+  Accept-Language: ru-RU
+  Accept-Language: ru; q=0.8
+  Accept-Language: en-US; q=0.6
+  Accept-Language: en; q=0.4
+  Accept-Language: bg; q=0.2
+  Cookie: __test=1
+  Host: localhost
+  User-Agent: Mozilla/5.0
+  User-Agent: (Windows NT 6.1; WOW64)
+  User-Agent: AppleWebKit/537.36
+  User-Agent: (KHTML, like Gecko)
+  User-Agent: Chrome/44.0.2403.89
+  User-Agent: Safari/537.36
+  HTTPS: 1
+}

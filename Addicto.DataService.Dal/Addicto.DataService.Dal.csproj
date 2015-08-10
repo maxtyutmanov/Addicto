@@ -62,15 +62,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201504222119526_1.resx">
+      <DependentUpon>201504222119526_1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Addicto.DataService.Model\Addicto.DataService.Model.csproj">
       <Project>{9f399dce-7ba8-4e3d-bf8e-44a796bdf279}</Project>
       <Name>Addicto.DataService.Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201504222119526_1.resx">
-      <DependentUpon>201504222119526_1.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

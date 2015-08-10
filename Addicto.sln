@@ -10,6 +10,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{096A3723-BFE3-4E5C-A171-AEB511D85118}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Addicto.DataService.Api", "Addicto.DataService.Api\Addicto.DataService.Api.csproj", "{1987A934-4B39-4F24-A5AC-6C3F2DF5AE9C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9C737B40-51D8-47B4-8AC2-40C21E3B0776} = {9C737B40-51D8-47B4-8AC2-40C21E3B0776}
+		{9F399DCE-7BA8-4E3D-BF8E-44A796BDF279} = {9F399DCE-7BA8-4E3D-BF8E-44A796BDF279}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Addicto.DataService.Api.Tests", "Addicto.DataService.Api.Tests\Addicto.DataService.Api.Tests.csproj", "{A95B884D-905E-45C8-A972-3FF811E0FE76}"
 EndProject
@@ -20,10 +24,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gma.UserActivityMonitor", "Gma.UserActivityMonitor\Gma.UserActivityMonitor.csproj", "{F52AA97E-180A-40ED-8F2B-09080171D6C7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Addicto.DataService.Dal", "Addicto.DataService.Dal\Addicto.DataService.Dal.csproj", "{9F456AD2-8CCC-490D-B70A-A49121F02569}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9F399DCE-7BA8-4E3D-BF8E-44A796BDF279} = {9F399DCE-7BA8-4E3D-BF8E-44A796BDF279}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Addicto.DataService.Proxy", "Addicto.DataService.Proxy\Addicto.DataService.Proxy.csproj", "{A12EB5BE-5682-4BEE-9DDE-232D2A4E043B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Addicto.DataService.Business", "Addicto.DataService.Business\Addicto.DataService.Business.csproj", "{9C737B40-51D8-47B4-8AC2-40C21E3B0776}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9F399DCE-7BA8-4E3D-BF8E-44A796BDF279} = {9F399DCE-7BA8-4E3D-BF8E-44A796BDF279}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Addicto.DataService.Model", "Addicto.DataService.Model\Addicto.DataService.Model.csproj", "{9F399DCE-7BA8-4E3D-BF8E-44A796BDF279}"
 EndProject
