@@ -6,3 +6,4 @@ ipch/
 **/bin
 **/obj
 packages
+Addicto.DataService.Api/logs/*
