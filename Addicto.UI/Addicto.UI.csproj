@@ -73,6 +73,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="TemplateSelectors\SearchStateTemplateSelector.cs" />
     <Compile Include="Utils\DataServiceFacade.cs" />
     <Compile Include="Utils\IDataServiceFacade.cs" />
     <Compile Include="Utils\IKeyboardListener.cs" />
@@ -81,6 +82,9 @@
     <Compile Include="Utils\TextFetcher.cs" />
     <Compile Include="VM\BaseVM.cs" />
     <Compile Include="VM\MainVM.cs" />
+    <Compile Include="VM\SearchStateVM\FoundVM.cs" />
+    <Compile Include="VM\SearchStateVM\InProgressVM.cs" />
+    <Compile Include="VM\SearchStateVM\NothingFoundVM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
