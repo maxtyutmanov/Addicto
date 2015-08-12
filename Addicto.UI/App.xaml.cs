@@ -15,7 +15,6 @@ namespace Addicto.UI
     {
         public App()
         {
-            Addicto.DataService.Client.DataServiceProxyConfig.Initialize();
         }
     }
 }

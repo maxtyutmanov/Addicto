@@ -1,5 +1,5 @@
 ﻿using Addicto.DataService.Business;
-using Addicto.DataService.Model;
+//using Addicto.DataService.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,20 +24,25 @@ namespace Addicto.DataService.Api.Controllers
         }
 
         // GET api/articles?query=some_query
-        public string Get(string query)
+        public Addicto.DataService.Api.Contracts.Article Get(string query)
         {
-            Article foundArticle = this._articleService.GetBestMatch(new Model.ArticleQuery()
+            Addicto.DataService.Model.Article foundArticle = this._articleService.GetBestMatch(new Model.ArticleQuery()
             {
                 QueryText = query
             });
 
             if (foundArticle != null)
             {
-                return foundArticle.Content;
+                return new Contracts.Article()
+                {
+                    Id = foundArticle.Id,
+                    Key = foundArticle.Key,
+                    Content = foundArticle.Content
+                };
             }
             else
             {
-                return String.Empty;
+                return null;
             }
         }
 

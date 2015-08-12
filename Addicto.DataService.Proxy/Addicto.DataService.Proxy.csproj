@@ -11,7 +11,7 @@
     <AssemblyName>Addicto.DataService.Client</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>4501e38e</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>80016195</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,33 +54,23 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebApiProxy.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WebApiProxy.CSharp.1.0.4.7731\lib\net45\WebApiProxy.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="WebApiProxy.Tasks, Version=1.0.4.7731, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WebApiProxy.CSharp.1.0.4.7731\lib\net45\WebApiProxy.Tasks.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticleProxy.cs" />
     <Compile Include="DataServiceProxyConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebApiProxy\WebApiProxy.generated.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
-    <None Include="WebApiProxy\WebApiProxy.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Addicto.DataService.Api.Contracts\Addicto.DataService.Api.Contracts.csproj">
+      <Project>{020ff5d2-0742-4f99-bf05-fbf51058931f}</Project>
+      <Name>Addicto.DataService.Api.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\WebApiProxy.CSharp.1.0.4.7731\build\WebApiProxy.CSharp.targets" Condition="Exists('..\packages\WebApiProxy.CSharp.1.0.4.7731\build\WebApiProxy.CSharp.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\WebApiProxy.CSharp.1.0.4.7731\build\WebApiProxy.CSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WebApiProxy.CSharp.1.0.4.7731\build\WebApiProxy.CSharp.targets'))" />
-  </Target>
   <Import Project="$(SlowCheetahTargets)" Condition="Exists('$(SlowCheetahTargets)')" Label="SlowCheetah" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -20,7 +20,7 @@ namespace Addicto.DataService.Client
                     string urlFromConfig = ConfigurationManager.AppSettings["DataSvcRoot"];
                     if (String.IsNullOrEmpty(urlFromConfig))
                     {
-                        throw new ConfigurationException("DataSvcRoot element is not defined");
+                        throw new ConfigurationErrorsException("DataSvcRoot element is not defined");
                     }
 
                     _rootUrl = urlFromConfig;
@@ -28,11 +28,6 @@ namespace Addicto.DataService.Client
 
                 return _rootUrl;
             }
-        }
-
-        public static void Initialize()
-        {
-            Addicto.DataService.Client.Proxies.Configuration.MyWebApiProxyBaseAddress = RootUrl;
         }
     }
 }

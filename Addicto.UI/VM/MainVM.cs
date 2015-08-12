@@ -1,4 +1,5 @@
-﻿using Addicto.UI.Utils;
+﻿using Addicto.DataService.Api.Contracts;
+using Addicto.UI.Utils;
 using Addicto.UI.VM.SearchStateVM;
 using System;
 using System.Collections.Generic;
@@ -63,8 +64,8 @@ namespace Addicto.UI.VM
         {
             string selectedTxt = _textFetcher.FetchSelectedText();
             OnSearchStarted();
-            string foundTxt = await _dataServiceFacade.FindArticleAsync(selectedTxt);
-            OnSearchComplete(foundTxt);
+            Article foundArticle = await _dataServiceFacade.FindArticleAsync(selectedTxt);
+            OnSearchComplete(foundArticle);
         }
 
         private void OnSearchStarted()
@@ -73,18 +74,18 @@ namespace Addicto.UI.VM
             this.Visible = true;
         }
 
-        private void OnSearchComplete(string foundTxt)
+        private void OnSearchComplete(Article foundArticle)
         {
-            if (String.IsNullOrEmpty(foundTxt))
-            {
-                this.SearchStateVM = new NothingFoundVM();
-            }
-            else
+            if (foundArticle != null)
             {
                 this.SearchStateVM = new FoundVM()
                 {
-                    FoundText = foundTxt
+                    FoundText = foundArticle.Content
                 };
+            }
+            else
+            {
+                this.SearchStateVM = new NothingFoundVM();
             }
         }
 

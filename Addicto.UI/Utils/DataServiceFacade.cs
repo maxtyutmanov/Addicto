@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Addicto.DataService.Api.Contracts;
+using Addicto.DataService.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,19 +10,10 @@ namespace Addicto.UI.Utils
 {
     public class DataServiceFacade : IDataServiceFacade
     {
-        public async Task<string> FindArticleAsync(string query)
+        public async Task<Article> FindArticleAsync(string query)
         {
-            var proxy = new DataService.Client.Proxies.Clients.ArticlesClient();
-
-            var response = await proxy.GetAsync(query);
-            var result = await response.Content.ReadAsStringAsync();
-
-            if (!String.IsNullOrEmpty(result))
-            {
-                result = result.Trim('"');
-            }
-
-            return result;
+            var proxy = new ArticleProxy();
+            return await proxy.GetAsync(query);
         }
     }
 }

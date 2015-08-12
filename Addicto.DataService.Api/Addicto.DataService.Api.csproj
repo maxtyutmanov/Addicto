@@ -158,6 +158,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Addicto.DataService.Api.Contracts\Addicto.DataService.Api.Contracts.csproj">
+      <Project>{020ff5d2-0742-4f99-bf05-fbf51058931f}</Project>
+      <Name>Addicto.DataService.Api.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Addicto.DataService.Business\Addicto.DataService.Business.csproj">
       <Project>{9c737b40-51d8-47b4-8ac2-40c21e3b0776}</Project>
       <Name>Addicto.DataService.Business</Name>

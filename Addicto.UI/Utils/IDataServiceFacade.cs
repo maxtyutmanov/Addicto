@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Addicto.DataService.Api.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Addicto.UI.Utils
 {
     public interface IDataServiceFacade
     {
-        Task<string> FindArticleAsync(string query);
+        Task<Article> FindArticleAsync(string query);
     }
 }
