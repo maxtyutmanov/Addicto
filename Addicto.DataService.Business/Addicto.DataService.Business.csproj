@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,6 +49,10 @@
   <ItemGroup>
     <Compile Include="ArticleService.cs" />
     <Compile Include="IArticleService.cs" />
+    <Compile Include="DataSource.cs" />
+    <Compile Include="IdBasedQueryRouter.cs" />
+    <Compile Include="InternalDbDataSource.cs" />
+    <Compile Include="IQueryRouter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

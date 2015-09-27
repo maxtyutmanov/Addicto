@@ -8,6 +8,7 @@ namespace Addicto.DataService.Model
 {
     public class ArticleQuery
     {
+        public int DataSourceId { get; set; }
         public string QueryText { get; set; }
     }
 }
