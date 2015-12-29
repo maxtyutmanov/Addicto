@@ -8,7 +8,7 @@ namespace Addicto.Core.Client.Adapter
 {
     public interface IDataAdapter
     {
-        Task<object> GetAsync(string query);
-        Task PostAsync(string query, object article);
+        Task<object> GetAsync(SearchContext searchCtx);
+        Task PostAsync(SearchContext searchCtx, object article);
     }
 }

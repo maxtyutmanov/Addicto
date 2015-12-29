@@ -9,8 +9,10 @@ namespace Addicto.Core.Client
 {
     public interface IGlobalContext
     {
-        SearchContext CurrentSearch { get; set; }
+        SearchContext CurrentSearch { get; }
         IModuleDescriptor CurrentModule { get; set; }
         BaseVm CurrentVm { get; set; }
+
+        bool TryStartSearch(string query);
     }
 }

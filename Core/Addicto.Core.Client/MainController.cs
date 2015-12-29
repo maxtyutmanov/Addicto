@@ -1,4 +1,5 @@
-﻿using Addicto.Core.Client.Utils;
+﻿using Addicto.Core.Client.UI.VM.Shared;
+using Addicto.Core.Client.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -10,6 +11,8 @@ namespace Addicto.Core.Client
 {
     public class MainController
     {
+        private static readonly object _lockObj = new object();
+
         private readonly IGlobalContext _globalCtx;
         private readonly ITextFetcher _textFetcher;
 
@@ -24,28 +27,40 @@ namespace Addicto.Core.Client
 
         public void OnMagicCombination()
         {
-            //if there is a search operation in progress, ignore the magic combination. Don't proceed
-            if (_globalCtx.CurrentSearch != null)
+            OnMagicCombinationInternal();
+        }
+
+        private void OnMagicCombinationInternal()
+        {
+            //fetch currently selected text, set up search context
+            string selectedTxt = _textFetcher.FetchSelectedText();
+            if (String.IsNullOrEmpty(selectedTxt))
             {
+                //nothing to search
                 return;
             }
 
-            //fetch currently selected text, set up search context
-            string selectedTxt = _textFetcher.FetchSelectedText();
-
-            if (!String.IsNullOrEmpty(selectedTxt))
+            if (_globalCtx.TryStartSearch(selectedTxt))
             {
-                _globalCtx.CurrentSearch = new SearchContext()
-                {
-                    Query = selectedTxt
-                };
+                var searchCtx = _globalCtx.CurrentSearch;
+
+                IModuleDescriptor currentModule = _globalCtx.CurrentModule;
+
+                //asynchronously run the searching process using currently selected module
+                Task<object> responseTask = currentModule.DataAdapter.GetAsync(searchCtx);
+
+                //meanwhile, update the UI: ask user to wait for search results
+                WaitForReplyVm waitVm = currentModule.VmFactory.CreateWaitForReply(searchCtx);
+                _globalCtx.CurrentVm = waitVm;
+
+                //wait for the task to finish, get its result
+                object result = responseTask.Result;
+                searchCtx.Response = result;
+
+                //update the UI accordingly: show the result to user
+                SearchFinishedVm finishedVm = currentModule.VmFactory.CreateSearchFinished(searchCtx);
+                _globalCtx.CurrentVm = finishedVm;
             }
-
-            IModuleDescriptor currentModule = _globalCtx.CurrentModule;
-
-            //run the searching process using currently selected module
-
-            //update UI accordingly
         }
 
         public void ChangeCurrentModule(IModuleDescriptor module)

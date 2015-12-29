@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Addicto.Core.Client
@@ -13,18 +14,27 @@ namespace Addicto.Core.Client
     {
         #region Properties and Fields
 
+        private readonly object _lockObj = new object();
+
         private List<IModuleDescriptor> _moduleCtxs;
+        public IEnumerable<IModuleDescriptor> ModuleCtxs
+        {
+            get
+            {
+                return _moduleCtxs;
+            }
+        }
 
         private IModuleDescriptor _currentModule;
         public IModuleDescriptor CurrentModule
         {
             get
             {
-                Contract.Requires<InvalidOperationException>(_moduleCtxs != null && _moduleCtxs.Any(), "No modules are defined");
+                Contract.Requires<InvalidOperationException>(ModuleCtxs != null && ModuleCtxs.Any(), "No modules are defined");
 
                 if (_currentModule == null)
                 {
-                    _currentModule = _moduleCtxs.First();
+                    _currentModule = ModuleCtxs.First();
                 }
 
                 return _currentModule;
@@ -32,7 +42,7 @@ namespace Addicto.Core.Client
             set
             {
                 Contract.Requires<ArgumentNullException>(value != null, "Current module context cannot be null");
-                Contract.Requires<ArgumentException>(_moduleCtxs.Contains(value), "Current module must be in the list of registered modules");
+                Contract.Requires<ArgumentException>(ModuleCtxs.Contains(value), "Current module must be in the list of registered modules");
 
                 _currentModule = value;
             }
@@ -48,6 +58,19 @@ namespace Addicto.Core.Client
             set
             {
                 _currentVm = value;
+            }
+        }
+
+        private SearchContext _currentSearch;
+        public SearchContext CurrentSearch
+        {
+            get
+            {
+                return _currentSearch;
+            }
+            private set
+            {
+                _currentSearch = value;
             }
         }
 
@@ -72,16 +95,22 @@ namespace Addicto.Core.Client
 
         #endregion
 
-        private SearchContext _currentSearch;
-        public SearchContext CurrentSearch
+
+        public bool TryStartSearch(string query)
         {
-            get
+            lock (_lockObj)
             {
-                return _currentSearch;
-            }
-            set
-            {
-                _currentSearch = value;
+                if (this.CurrentSearch == null)
+                {
+                    this.CurrentSearch = new SearchContext()
+                    {
+                        Query = query
+                    };
+
+                    return true;
+                }
+
+                return false;
             }
         }
     }
