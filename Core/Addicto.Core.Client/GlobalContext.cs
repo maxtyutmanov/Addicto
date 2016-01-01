@@ -14,7 +14,7 @@ namespace Addicto.Core.Client
     {
         #region Properties and Fields
 
-        private readonly object _lockObj = new object();
+        private readonly object _searchCtxLock = new object();
 
         private List<IModuleDescriptor> _moduleCtxs;
         public IEnumerable<IModuleDescriptor> ModuleCtxs
@@ -74,6 +74,17 @@ namespace Addicto.Core.Client
             }
         }
 
+        public void ClearSearchContext()
+        {
+            lock (_searchCtxLock)
+            {
+                if (CurrentSearch != null && CurrentSearch.IsFinished)
+                {
+                    this.CurrentSearch = null;
+                }
+            }
+        }
+
         #endregion
 
         #region .ctor
@@ -96,9 +107,9 @@ namespace Addicto.Core.Client
         #endregion
 
 
-        public bool TryStartSearch(string query)
+        public bool InitSearchContext(string query)
         {
-            lock (_lockObj)
+            lock (_searchCtxLock)
             {
                 if (this.CurrentSearch == null)
                 {

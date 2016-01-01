@@ -13,6 +13,7 @@ namespace Addicto.Core.Client
         IModuleDescriptor CurrentModule { get; set; }
         BaseVm CurrentVm { get; set; }
 
-        bool TryStartSearch(string query);
+        bool InitSearchContext(string query);
+        void ClearSearchContext();
     }
 }

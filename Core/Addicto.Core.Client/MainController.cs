@@ -11,8 +11,6 @@ namespace Addicto.Core.Client
 {
     public class MainController
     {
-        private static readonly object _lockObj = new object();
-
         private readonly IGlobalContext _globalCtx;
         private readonly ITextFetcher _textFetcher;
 
@@ -25,12 +23,7 @@ namespace Addicto.Core.Client
             this._textFetcher = textFetcher;
         }
 
-        public void OnMagicCombination()
-        {
-            OnMagicCombinationInternal();
-        }
-
-        private void OnMagicCombinationInternal()
+        public async Task OnMagicCombinationPressed()
         {
             //fetch currently selected text, set up search context
             string selectedTxt = _textFetcher.FetchSelectedText();
@@ -40,27 +33,31 @@ namespace Addicto.Core.Client
                 return;
             }
 
-            if (_globalCtx.TryStartSearch(selectedTxt))
+            if (_globalCtx.InitSearchContext(selectedTxt))
             {
                 var searchCtx = _globalCtx.CurrentSearch;
 
                 IModuleDescriptor currentModule = _globalCtx.CurrentModule;
 
                 //asynchronously run the searching process using currently selected module
-                Task<object> responseTask = currentModule.DataAdapter.GetAsync(searchCtx);
+                Task<object> adapterResponseTask = currentModule.DataAdapter.GetAsync(searchCtx);
 
                 //meanwhile, update the UI: ask user to wait for search results
                 WaitForReplyVm waitVm = currentModule.VmFactory.CreateWaitForReply(searchCtx);
                 _globalCtx.CurrentVm = waitVm;
 
                 //wait for the task to finish, get its result
-                object result = responseTask.Result;
-                searchCtx.Response = result;
+                searchCtx.Response = await adapterResponseTask;
 
                 //update the UI accordingly: show the result to user
                 SearchFinishedVm finishedVm = currentModule.VmFactory.CreateSearchFinished(searchCtx);
                 _globalCtx.CurrentVm = finishedVm;
             }
+        }
+
+        public void OnPopupHideRequested()
+        {
+            _globalCtx.ClearSearchContext();
         }
 
         public void ChangeCurrentModule(IModuleDescriptor module)

@@ -17,7 +17,7 @@ namespace Addicto.Core.Client.Tests
             GlobalContext ctx = CreateGlobalCtx();
             MainController sut = CreateSUT(ctx, "some_text");
 
-            sut.OnMagicCombination();
+            sut.OnMagicCombinationPressed().Wait();
 
             Assert.That(ctx.CurrentSearch, Is.Not.Null);
         }
@@ -28,7 +28,7 @@ namespace Addicto.Core.Client.Tests
             GlobalContext ctx = CreateGlobalCtx();
             MainController sut = CreateSUT(ctx, "");
 
-            sut.OnMagicCombination();
+            sut.OnMagicCombinationPressed().Wait();
 
             Assert.That(ctx.CurrentSearch, Is.Null);
         }
@@ -41,7 +41,7 @@ namespace Addicto.Core.Client.Tests
 
             BaseVm prevVm = ctx.CurrentVm;
 
-            sut.OnMagicCombination();
+            sut.OnMagicCombinationPressed().Wait();
 
             Assert.That(ctx.CurrentVm, Is.EqualTo(prevVm));
         }
@@ -52,10 +52,10 @@ namespace Addicto.Core.Client.Tests
             GlobalContext ctx = CreateGlobalCtx();
             MainController sut = CreateSUT(ctx, "some_text");
 
-            ctx.TryStartSearch("some_previous_query");
+            ctx.InitSearchContext("some_previous_query");
 
             SearchContext prevSearchCtx = ctx.CurrentSearch;
-            sut.OnMagicCombination();
+            sut.OnMagicCombinationPressed().Wait();
 
             Assert.That(ctx.CurrentSearch, Is.EqualTo(prevSearchCtx));
         }
@@ -66,7 +66,7 @@ namespace Addicto.Core.Client.Tests
             GlobalContext ctx = CreateGlobalCtx();
             MainController sut = CreateSUT(ctx, "some_text");
 
-            sut.OnMagicCombination();
+            sut.OnMagicCombinationPressed().Wait();
 
             Assert.That(ctx.CurrentVm, Is.InstanceOf<SearchFinishedVm>());
         }
@@ -79,9 +79,36 @@ namespace Addicto.Core.Client.Tests
             GlobalContext ctx = CreateGlobalCtx(ref daMock);
             MainController sut = CreateSUT(ctx, "some_text");
 
-            sut.OnMagicCombination();
+            sut.OnMagicCombinationPressed().Wait();
 
             daMock.Verify(da => da.GetAsync(It.IsAny<SearchContext>()), Times.Once);
+        }
+
+        [Test]
+        public void SearchContextIsNullAfterPopupIsHiddenIfSearchIsFinished()
+        {
+            GlobalContext ctx = CreateGlobalCtx();
+            MainController sut = CreateSUT(ctx, "some_text");
+            ctx.InitSearchContext("some_text");
+            ctx.CurrentSearch.Response = "some_response";
+
+            sut.OnPopupHideRequested();
+
+            Assert.That(ctx.CurrentSearch, Is.Null);
+        }
+
+        [Test]
+        public void SearchContextStaysSameAfterPopupIsHiddenIfSearchInProgress()
+        {
+            GlobalContext ctx = CreateGlobalCtx();
+            MainController sut = CreateSUT(ctx, "some_text");
+            ctx.InitSearchContext("some_text");
+
+            SearchContext prevSearchCtx = ctx.CurrentSearch;
+
+            sut.OnPopupHideRequested();
+
+            Assert.That(ctx.CurrentSearch, Is.EqualTo(prevSearchCtx));
         }
 
         private GlobalContext CreateGlobalCtx()
